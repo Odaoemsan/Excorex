@@ -1,0 +1,40 @@
+
+{
+  "entities": {
+    "Submission": {
+      "title": "Submission",
+      "description": "بيانات تسجيل الدخول المرسلة من المستخدمين",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "description": "البريد الإلكتروني للمستخدم"
+        },
+        "password": {
+          "type": "string",
+          "description": "كلمة المرور"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "وقت الإرسال"
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "/submissions/{submissionId}": {
+      "schema": "Submission",
+      "description": "مجموعة تحتوي على طلبات الهدايا وبيانات الحسابات"
+    }
+  }
+}
