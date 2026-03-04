@@ -2,9 +2,9 @@
   "placeholderImages": [
     {
       "id": "excorex-logo",
-      "description": "شعار منصة ExCoreX الرسمي",
-      "imageUrl": "https://picsum.photos/seed/excorex/200/200",
-      "imageHint": "crypto logo"
+      "description": "ExCoreX Official Brand Logo",
+      "imageUrl": "https://picsum.photos/seed/excorex-exchange-v3/400/400",
+      "imageHint": "crypto exchange"
     }
   ]
 }

