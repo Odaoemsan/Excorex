@@ -1,10 +1,3 @@
 {
-  "placeholderImages": [
-    {
-      "id": "excorex-logo",
-      "description": "ExCoreX Official Brand Logo",
-      "imageUrl": "https://picsum.photos/seed/excorex-exchange-v3/400/400",
-      "imageHint": "crypto exchange"
-    }
-  ]
+  "placeholderImages": []
 }
