@@ -1,8 +1,8 @@
 export const firebaseConfig = {
-  apiKey: "placeholder-api-key",
-  authDomain: "placeholder-project-id.firebaseapp.com",
-  projectId: "placeholder-project-id",
-  storageBucket: "placeholder-project-id.appspot.com",
-  messagingSenderId: "000000000000",
-  appId: "1:000000000000:web:0000000000000000000000"
+  apiKey: "AIzaSyClmmF6_D3o2k-fqXM0wjis0WqN9TMg",
+  authDomain: "excorex-2965c.firebaseapp.com",
+  projectId: "excorex-2965c",
+  storageBucket: "excorex-2965c.firebasestorage.app",
+  messagingSenderId: "137703529176",
+  appId: "1:137703529176:web:59f8fdc0f5c368901015ad"
 };

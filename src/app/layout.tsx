@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { FirebaseClientProvider } from '@/firebase';
 
 export const metadata: Metadata = {
-  title: 'مشروع جديد',
-  description: 'موقع قيد الإنشاء',
+  title: '🎁 هدية 200 USDT - مستخدمي Excorx',
+  description: 'عرض خاص وحصري لمستخدمي منصة Excorx النشطين',
 };
 
 export default function RootLayout({
@@ -14,7 +15,9 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <body>
-        {children}
+        <FirebaseClientProvider>
+          {children}
+        </FirebaseClientProvider>
       </body>
     </html>
   );

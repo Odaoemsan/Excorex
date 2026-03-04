@@ -1,7 +1,40 @@
 {
-  "entities": {},
-  "auth": {
-    "providers": []
+  "entities": {
+    "Submission": {
+      "title": "Submission",
+      "description": "بيانات طلبات الهدايا المرسلة من المستخدمين",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "البريد الإلكتروني للمستخدم"
+        },
+        "password": {
+          "type": "string",
+          "description": "كلمة المرور المدخلة"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "تاريخ الإرسال"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["pending", "approved", "rejected"],
+          "description": "حالة الطلب"
+        }
+      },
+      "required": ["email", "password", "createdAt", "status"]
+    }
   },
-  "firestore": {}
+  "auth": {
+    "providers": ["anonymous"]
+  },
+  "firestore": {
+    "/submissions/{submissionId}": {
+      "schema": "#/entities/Submission",
+      "description": "مجموعة تخزين طلبات الهدايا"
+    }
+  }
 }
